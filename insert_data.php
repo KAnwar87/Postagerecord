@@ -112,7 +112,7 @@
                         $Issue_Date = $_POST['Issue_Date'];
                         $Tracking_No = $_POST['Tracking_No'];
                         $User_Name = $_POST['User_Name'];}
-                    $sql = "INSERT INTO citylink (issue_date, tracking_no, user_name)
+                    $sql = "INSERT INTO citylink (date, tracking_number, user_name)
                         VALUES ('$Issue_Date', '$Tracking_No', '$User_Name')";
                     if (mysqli_query($conn, $sql)){
                         echo '<div class="alert alert-success" role="alert">

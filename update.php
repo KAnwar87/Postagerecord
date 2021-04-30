@@ -70,7 +70,7 @@
                 <?php require_once('config.php');?>
 
                 <?php
-                $sql = "SELECT id,issue_date,tracking_no,user_name,billing_month,payment_status FROM citylink LIMIT 50";
+                $sql = "SELECT id,date,tracking_number,user_name,billing_month,payment_status FROM citylink LIMIT 50";
                 $result = $conn->query($sql);
 
                 echo "<table class='table table-striped table-hover mt-4' id='jadual'>
@@ -87,7 +87,7 @@
                     
                     //print data
                     while ($row=$result->fetch_assoc()) {
-                        echo "<tr><td>".$row["id"]."</td><td>".$row["issue_date"]."</td><td>".$row["tracking_no"]."</td>
+                        echo "<tr><td>".$row["id"]."</td><td>".$row["date"]."</td><td>".$row["tracking_number"]."</td>
                         <td>".$row["user_name"]."</td><td>".$row["billing_month"]."</td>
                         <td>".$row["payment_status"]."</td>
                         <td><button type='button' formmethod='post' formaction='loancalc4.php' class='btn btn-outline-info'>Edit</button>

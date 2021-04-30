@@ -65,9 +65,9 @@
             </nav>
 
             <div class="container-fluid">
-                <h1 class="mt-4">Select Data From Database</h1>
+                <h1 class="mt-4">Update Data From Database</h1>
                 
-                <?php require_once('config.php');?>
+                <?php require('config.php');?>
 
                 <?php
                 $sql = "SELECT id,date,tracking_number,user_name,billing_month,payment_status FROM citylink LIMIT 50";
@@ -81,12 +81,67 @@
                         <th>User</th>
                         <th>Billing Month</th>
                         <th>Payment Status</th>
+                        <th>Edit Record</th>
                     </tr>";
                 if ($result->num_rows>0){
                     
                     //print data
                     while ($row=$result->fetch_assoc()) {
-                        echo "<tr><td>".$row["id"]."</td><td>".$row["date"]."</td><td>".$row["tracking_number"]."</td><td>".$row["user_name"]."</td><td>".$row["billing_month"]."</td><td>".$row["payment_status"]."</td></tr>";
+                        echo "<tr><td>".$row["id"]."</td><td>".$row["date"]."</td><td>".$row["tracking_number"]."</td>
+                        <td>".$row["user_name"]."</td><td>".$row["billing_month"]."</td>
+                        <td>".$row["payment_status"]."</td>
+                        <td><button type='button' class='btn btn-outline-info' data-toggle='modal' data-target='#myModal'>Edit</button>
+                            <!-- Modal -->
+                                <div id='myModal' class='modal fade' role='dialog'>
+                                <div class='modal-dialog'>
+                                
+                                    <!-- Modal content-->
+                                    <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <h5 class='modal-title' id='exampleModalLabel'>Edit Record</h5>
+                                        <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <form role='form' action='edit_record.php' method='get'>
+                                            <?php
+                                            $id = $data['id']; 
+                                            $query_edit = mysql_query("SELECT * FROM citylink WHERE id='$id'");
+                                            $result = mysqli_query($conn, $query);
+                                            while ($row = mysql_fetch_array($query_edit)) {  
+                                            ?>
+                                        
+                                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                        
+                                            <div class="form-group">
+                                            <label>Tracking Number</label>
+                                            <input type="text" name="Tracking Number" class="form-control" value="<?php echo $row['tracking_number']; ?>">      
+                                            </div>
+
+                                            <div class="form-group">
+                                            <label>User Name</label>
+                                            <input type="text" name="User Name" class="form-control" value="<?php echo $row['user_name']; ?>">      
+                                            </div>
+
+                                            <div class="modal-footer">  
+                                            <button type="submit" class="btn btn-success">Update</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+
+                                            <?php 
+                                            }
+                                            //mysql_close($host);
+                                            ?>        
+                                            </form>
+                                    </div>
+                                    <div class='modal-footer'>
+                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                        <button type='button' class='btn btn-primary'>Send message</button>
+                                    </div>
+                                    </div>
+                                
+                                </div>
+                                </div>
+                        <button type='reset' class='btn btn-outline-danger'>Delete</button></td></tr>";
                     }
 
                 }else{
