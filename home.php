@@ -1,3 +1,14 @@
+<?php
+    // Initialize the session
+    session_start();
+
+    // Check if the user is logged in, if not then redirect him to login page
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: login.php");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Postage Records</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,14 +33,12 @@
 
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Postage Records</div>
+            <div class="sidebar-heading">KAWM<br>Postage Records</div>
             <div class="list-group list-group-flush">
-            <a href="index.html" class="list-group-item list-group-item-action bg-light">Connect To DB</a>
-            <a href="select.php" class="list-group-item list-group-item-action bg-light">Select</a>
-            <a href="insert_data.php" class="list-group-item list-group-item-action bg-light">Insert</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Insert Ganda</a>
-            <a href="update.php" class="list-group-item list-group-item-action bg-light">Update</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Delete</a>
+            <a href="home.php" class="list-group-item list-group-item-action bg-light">Home</a>
+            <a href="add_data.php" class="list-group-item list-group-item-action bg-light">Add Record</a>
+            <a href="update.php" class="list-group-item list-group-item-action bg-light">View & Edit Record</a>
+
             </div>
         </div>
     <!-- /#sidebar-wrapper -->
@@ -45,19 +56,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
+                    <!-- <li class="nav-item active">
                     <a class="nav-link" href="#">Menu<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Name</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo htmlspecialchars($_SESSION["username"]); ?></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">My Details</a>
-                            <a class="dropdown-item" href="#">View Report</a>
+                            <!-- <a class="dropdown-item" href="#">My Details</a> -->
+                            <a class="dropdown-item" href="reset-password.php">Reset password</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -65,36 +76,8 @@
             </nav>
 
             <div class="container-fluid">
-                <h1 class="mt-4">Select Data From Database</h1>
-                
-                <?php require_once('config.php');?>
-
-                <?php
-                $sql = "SELECT id,date,tracking_number,user_name,billing_month,payment_status FROM citylink LIMIT 50";
-                $result = $conn->query($sql);
-
-                echo "<table class='table table-striped table-hover mt-4' id='jadual'>
-                    <tr style='background:rgb(26, 185, 164);'>
-                        <th>ID</th>
-                        <th>Issue Date</th>
-                        <th>Tracking No</th>
-                        <th>User</th>
-                        <th>Billing Month</th>
-                        <th>Payment Status</th>
-                    </tr>";
-                if ($result->num_rows>0){
-                    
-                    //print data
-                    while ($row=$result->fetch_assoc()) {
-                        echo "<tr><td>".$row["id"]."</td><td>".$row["date"]."</td><td>".$row["tracking_number"]."</td><td>".$row["user_name"]."</td><td>".$row["billing_month"]."</td><td>".$row["payment_status"]."</td></tr>";
-                    }
-
-                }else{
-                    echo "<tr><td>Data Tiada</td></tr>";
-                }
-                echo "</table>";
-                ?>
-
+                <h1 class="mt-4">Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
+                <p>Click on menu to continue...</p>
             </div>
         </div>
     <!-- /#page-content-wrapper -->
