@@ -1,0 +1,24 @@
+https://khairulanwar.host.naklaman.com/
+--------------------------------------------
+
+:: Hosting 
+
+Username: hostnakl
+Password: !k4QZ]n7q9zBC9
+
+http://85.187.128.25:2082/
+
+--------------------------------------------
+
+:: Database
+
+hostnakl_postage_records	
+hostnakl_khairulanwar	
+Z3tT@byT3s
+
+--------------------------------------------
+
+:: FTP
+khairulanwar
+khairulanwar.host.naklaman.com
+Z3tT@byT3s

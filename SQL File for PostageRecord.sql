@@ -13,7 +13,7 @@
 
 
 -- Dumping database structure for postage_records
-CREATE DATABASE IF NOT EXISTS `postage_records` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+CREATE DATABASE IF NOT EXISTS `postage_records` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `postage_records`;
 
 -- Dumping structure for table postage_records.citylink
@@ -21,17 +21,17 @@ CREATE TABLE IF NOT EXISTS `citylink` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date` date DEFAULT NULL,
-  `tracking_number` varchar(15) DEFAULT NULL,
-  `user_name` varchar(50) DEFAULT NULL,
-  `user_email` varchar(100) DEFAULT NULL,
-  `billing_month` varchar(50) DEFAULT NULL,
+  `tracking_number` varchar(15) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `user_name` varchar(50) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `user_email` varchar(100) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `billing_month` varchar(50) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
   `payment_status` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_usage_user_name` (`user_name`),
   KEY `FK_usage_user_email` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
--- Dumping data for table postage_records.citylink: ~38 rows (approximately)
+-- Dumping data for table postage_records.citylink: ~42 rows (approximately)
 /*!40000 ALTER TABLE `citylink` DISABLE KEYS */;
 INSERT INTO `citylink` (`id`, `created_at`, `date`, `tracking_number`, `user_name`, `user_email`, `billing_month`, `payment_status`) VALUES
 	(1, '2021-04-06 17:10:46', '2021-04-05', '60301673116781', 'Azmah', 'sitinorazmahazmi@gmail.com', NULL, NULL),
@@ -74,20 +74,21 @@ INSERT INTO `citylink` (`id`, `created_at`, `date`, `tracking_number`, `user_nam
 	(38, '2021-04-29 20:56:08', '2021-04-29', '222', 'test', NULL, NULL, NULL),
 	(39, '2021-04-29 20:56:21', '2021-04-29', '111333', 'test user', NULL, '', b'0'),
 	(41, '2021-05-01 20:22:37', '2021-05-01', '444', 'test', NULL, NULL, NULL),
-	(42, '2021-05-01 21:49:55', '2021-05-01', '555', 'minah', NULL, NULL, NULL);
+	(42, '2021-05-01 21:49:55', '2021-05-01', '555', 'minah', NULL, NULL, NULL),
+	(43, '2021-05-22 07:41:55', '2021-05-21', '999', 'PARC ZettaBytes', NULL, NULL, NULL);
 /*!40000 ALTER TABLE `citylink` ENABLE KEYS */;
 
 -- Dumping structure for table postage_records.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `user_roles` varchar(50) DEFAULT 'user',
+  `username` varchar(50) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_general_mysql500_ci DEFAULT NULL,
+  `user_roles` varchar(50) COLLATE utf8_general_mysql500_ci DEFAULT 'user',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`username`),
   KEY `user_email` (`password`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_mysql500_ci;
 
 -- Dumping data for table postage_records.users: ~8 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
